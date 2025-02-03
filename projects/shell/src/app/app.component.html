@@ -1,0 +1,35 @@
+<nav class="bg-gray-900 p-4">
+  <ul class="flex space-x-8 justify-center">
+    <li>
+      <a
+        routerLink="/home"
+        routerLinkActive="text-white font-bold"
+        class="text-white text-lg hover:text-yellow-300 cursor-pointer"
+      >
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="/order-food"
+        routerLinkActive="text-white font-bold"
+        class="text-white text-lg hover:text-yellow-300 cursor-pointer"
+      >
+        Order Food
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="/admin-panel"
+        routerLinkActive="text-white font-bold"
+        class="text-white text-lg hover:text-yellow-300 cursor-pointer"
+      >
+        Admin Panel
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
