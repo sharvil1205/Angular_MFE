@@ -10,8 +10,9 @@ import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../../../shell/src/app/cart.service';
 
-interface IMenuItem {
+export interface IMenuItem {
   restaurantID: number;
   price: number;
   menuItemName: string;
@@ -77,7 +78,7 @@ export class ViewMenuComponent {
     },
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cartService: CartService) {
     const navigation = this.router.getCurrentNavigation();
     this.restaurant = navigation?.extras.state?.['restaurant'] || null;
   }
@@ -94,5 +95,10 @@ export class ViewMenuComponent {
     if (item.quantity > 1) {
       item.quantity--;
     }
+  }
+
+  addToCart(item: IMenuItem): void {
+    const cartItem = { ...item };
+    this.cartService.addItemToCart(cartItem);
   }
 }

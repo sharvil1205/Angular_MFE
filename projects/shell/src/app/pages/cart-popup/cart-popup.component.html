@@ -1,0 +1,63 @@
+<div
+  *ngIf="cartItems.length > 0"
+  class="fixed top-16 right-4 bg-white p-4 rounded-lg shadow-lg z-50 w-72 max-h-96 overflow-y-auto"
+>
+  <button class="absolute top-2 right-2 text-gray-600" (click)="closeCart()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <h2 class="text-xl font-bold text-center mb-4">Cart</h2>
+
+  <div
+    *ngFor="let item of cartItems"
+    class="flex items-center justify-between mb-4 border-b pb-3"
+  >
+    <img
+      [src]="item.photoUrl"
+      alt="{{ item.menuItemName }}"
+      class="w-16 h-16 object-cover rounded-lg"
+    />
+    <div class="flex-1 ml-6">
+      <div class="font-semibold">{{ item.menuItemName }}</div>
+      <div class="text-sm text-gray-500">₹{{ item.price }}/item</div>
+      <div class="flex items-center mt-2 space-x-2">
+        <button
+          mat-icon-button
+          class="w-6 h-6 flex items-center justify-center bg-gray-100 rounded"
+          (click)="decreaseQuantity(item)"
+        >
+          <mat-icon class="text-sm">remove</mat-icon>
+        </button>
+        <span class="text-sm font-medium">{{ item.quantity }}</span>
+        <button
+          mat-icon-button
+          class="w-6 h-6 flex items-center justify-center bg-gray-100 rounded"
+          (click)="increaseQuantity(item)"
+        >
+          <mat-icon class="text-sm">add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-col items-end ml-4">
+      <span class="font-semibold">₹{{ item.price * item.quantity }}</span>
+      <button
+        mat-icon-button
+        class="text-red-600 mt-2"
+        (click)="removeItem(item)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-4 text-lg font-semibold">Total: ₹{{ totalPrice }}</div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="w-full mt-4"
+    (click)="checkout()"
+  >
+    Proceed to Checkout
+  </button>
+</div>
