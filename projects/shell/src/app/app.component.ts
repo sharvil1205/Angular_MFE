@@ -38,5 +38,6 @@ export class AppComponent {
 
   openCart() {
     this.cartItems = this.cartService.getCartItems();
+    this.isCartVisible = true;
   }
 }

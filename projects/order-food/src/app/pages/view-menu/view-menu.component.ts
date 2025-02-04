@@ -21,7 +21,7 @@ export interface IMenuItem {
   availability: boolean;
   photoUrl: string;
   categoryName: string;
-  quantity: number; // Add quantity property
+  quantity: number;
 }
 
 @Component({

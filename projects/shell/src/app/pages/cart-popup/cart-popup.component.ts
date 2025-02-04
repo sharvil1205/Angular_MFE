@@ -34,8 +34,7 @@ export class CartPopupComponent implements OnInit {
   }
 
   closeCart() {
-    // Implement logic to close the cart popup
-    this.cartService.closeCartPopup(); // Adjust this as needed based on your cart service
+    this.cartService.closeCartPopup();
   }
 
   removeItem(item: any) {
