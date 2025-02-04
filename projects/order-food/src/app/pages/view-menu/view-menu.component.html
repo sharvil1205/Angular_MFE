@@ -1,0 +1,51 @@
+<!-- Restaurant Header Banner -->
+<div
+  class="bg-gradient-to-r from-orange-500 to-red-500 text-white py-6 px-8 rounded-lg shadow-lg text-center"
+>
+  <h1 class="text-3xl font-bold">{{ restaurant.name }}</h1>
+  <p class="text-lg mt-2">
+    {{ restaurant.cuisineType }} | {{ restaurant.address }}
+  </p>
+  <p class="text-lg mt-1">
+    📞 {{ restaurant.contactNo }} | 🕒 {{ restaurant.openingHours }}
+  </p>
+</div>
+
+<!-- Menu Section -->
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Menu</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      *ngFor="let item of menuItems"
+      class="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+    >
+      <img
+        [src]="item.photoUrl"
+        alt="{{ item.menuItemName }}"
+        class="w-full h-40 object-cover rounded-lg"
+      />
+
+      <div class="mt-4">
+        <h3 class="text-lg font-semibold text-gray-900">
+          {{ item.menuItemName }}
+        </h3>
+        <p class="text-sm text-gray-500">{{ item.categoryName }}</p>
+        <p class="text-sm text-gray-600 mt-1">{{ item.description }}</p>
+        <p class="text-lg font-bold text-green-600 mt-2">₹{{ item.price }}</p>
+      </div>
+
+      <button
+        class="w-full mt-4 px-4 py-2 text-white font-semibold rounded-lg transition-all duration-300"
+        [ngClass]="
+          item.availability
+            ? 'bg-blue-600 hover:bg-blue-700'
+            : 'bg-gray-400 cursor-not-allowed'
+        "
+        [disabled]="!item.availability"
+      >
+        {{ item.availability ? "Add to Cart" : "Unavailable" }}
+      </button>
+    </div>
+  </div>
+</div>

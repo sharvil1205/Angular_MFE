@@ -2,12 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, MatIconModule, MatFormFieldModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    RouterModule,
+    RouterOutlet,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  standalone: true,
 })
 export class AppComponent {
   title = 'order-food';
@@ -45,4 +53,19 @@ export class AppComponent {
       openingHours: '9AM - 9PM',
     },
   ];
+  showRestaurantList: boolean = true;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.showRestaurantList = !this.router.url.includes('/restaurant');
+    });
+  }
+
+  openViewMenuPage(restaurant: any): void {
+    const currentRoute = this.router.url.split('?')[0];
+    this.router.navigate([`${currentRoute}/restaurant`], {
+      queryParams: { restaurantId: restaurant.restaurantID },
+      state: { restaurant },
+    });
+  }
 }

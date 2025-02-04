@@ -1,4 +1,7 @@
-<div class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8">
+<div
+  *ngIf="showRestaurantList"
+  class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8"
+>
   <div class="mx-auto px-4 max-w-5xl">
     <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
       Restaurant Listings
@@ -46,6 +49,7 @@
           mat-raised-button
           color="primary"
           class="w-full py-3 px-5 text-white font-semibold rounded-lg bg-blue-700"
+          (click)="openViewMenuPage(restaurant)"
         >
           View Menu
         </button>
@@ -53,3 +57,4 @@
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>

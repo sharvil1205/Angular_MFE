@@ -20,6 +20,10 @@ export const routes: Routes = [
     path: 'order-food',
     loadComponent: () =>
       loadRemoteModule('order-food', './Component').then((m) => m.AppComponent),
+    loadChildren: () =>
+      import('../../../order-food/src/app/app.routes').then(
+        (feature) => feature.orderFoodRoutes
+      ),
   },
 
   { path: '**', redirectTo: 'home' },
