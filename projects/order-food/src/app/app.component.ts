@@ -24,7 +24,7 @@ export class AppComponent {
       restaurantID: 1,
       name: 'KINGS BAKES',
       cuisineType: 'VEG/NONVEG',
-      address: 'ODDANCHATRAM',
+      address: 'Mumbai',
       contactNo: '9865041255',
       openingHours: '5AM - 12PM',
     },
