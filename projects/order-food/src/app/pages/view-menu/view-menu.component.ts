@@ -11,6 +11,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../../../shell/src/app/cart.service';
+import { CartFacade } from '../../../../../shell/src/app/store/cart/cart.facade';
 
 export interface IMenuItem {
   restaurantID: number;
@@ -78,7 +79,7 @@ export class ViewMenuComponent {
     },
   ];
 
-  constructor(private router: Router, private cartService: CartService) {
+  constructor(private router: Router, private cartFacade: CartFacade) {
     const navigation = this.router.getCurrentNavigation();
     this.restaurant = navigation?.extras.state?.['restaurant'] || null;
   }
@@ -98,7 +99,6 @@ export class ViewMenuComponent {
   }
 
   addToCart(item: IMenuItem): void {
-    const cartItem = { ...item };
-    this.cartService.addItemToCart(cartItem);
+    this.cartFacade.addItem({ ...item });
   }
 }

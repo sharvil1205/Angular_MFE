@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { CartService } from './cart.service';
-import { IMenuItem } from '../../../order-food/src/app/pages/view-menu/view-menu.component';
+import { CartFacade } from './store/cart/cart.facade';
 import { CartPopupComponent } from './pages/cart-popup/cart-popup.component';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { IMenuItem } from '../../../order-food/src/app/pages/view-menu/view-menu.component';
 
 @Component({
   selector: 'app-shell-root',
@@ -14,30 +16,24 @@ import { CartPopupComponent } from './pages/cart-popup/cart-popup.component';
     RouterModule,
     MatIconModule,
     CartPopupComponent,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true,
 })
 export class AppComponent {
-  title = 'shell';
-  cartItems: IMenuItem[] = [];
-  isCartVisible = false;
+  cartItems$: Observable<IMenuItem[]>;
+  isCartVisible$: Observable<boolean>;
 
-  constructor(private cartService: CartService) {}
-
-  ngOnInit() {
-    this.cartService.cartItemsSubject.subscribe((items) => {
-      this.cartItems = items;
-    });
-
-    this.cartService.getCartPopupVisibility().subscribe((isVisible) => {
-      this.isCartVisible = isVisible;
-    });
+  constructor(private cartFacade: CartFacade) {
+    this.cartItems$ = this.cartFacade.items$;
+    this.isCartVisible$ = this.cartFacade.isVisible$;
   }
 
-  openCart() {
-    this.cartItems = this.cartService.getCartItems();
-    this.isCartVisible = true;
+  title = 'shell';
+
+  openCart(): void {
+    this.cartFacade.showCart();
   }
 }

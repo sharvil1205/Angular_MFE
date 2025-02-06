@@ -38,14 +38,19 @@
         (click)="openCart()"
       >
         <mat-icon class="text-2xl">shopping_cart</mat-icon>
-        <span
-          class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-        >
-          {{ cartItems.length }}
-        </span>
+        <ng-container *ngIf="cartItems$ | async as cartItems">
+          <span
+            *ngIf="(cartItems$ | async)?.length || 0 > 0"
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+          >
+            {{ cartItems.length }}
+          </span>
+        </ng-container>
       </button>
     </div>
   </div>
 </nav>
-<app-shell-cart-popup *ngIf="isCartVisible"></app-shell-cart-popup>
+
+<app-shell-cart-popup *ngIf="isCartVisible$ | async"></app-shell-cart-popup>
+
 <router-outlet></router-outlet>

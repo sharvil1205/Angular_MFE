@@ -1,5 +1,5 @@
 <div
-  *ngIf="cartItems.length > 0"
+  *ngIf="(cartItems$ | async)?.length || 0 > 0"
   class="fixed top-16 right-4 bg-white p-4 rounded-lg shadow-lg z-50 w-72 max-h-96 overflow-y-auto"
 >
   <button class="absolute top-2 right-2 text-gray-600" (click)="closeCart()">
@@ -9,7 +9,7 @@
   <h2 class="text-xl font-bold text-center mb-4">Cart</h2>
 
   <div
-    *ngFor="let item of cartItems"
+    *ngFor="let item of cartItems$ | async"
     class="flex items-center justify-between mb-4 border-b pb-3"
   >
     <img
@@ -50,7 +50,9 @@
     </div>
   </div>
 
-  <div class="mt-4 text-lg font-semibold">Total: ₹{{ totalPrice }}</div>
+  <div class="mt-4 text-lg font-semibold">
+    Total: ₹{{ totalPrice$ | async }}
+  </div>
 
   <button
     mat-raised-button
