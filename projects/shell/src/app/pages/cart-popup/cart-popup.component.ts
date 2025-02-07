@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-shell-cart-popup',
   templateUrl: './cart-popup.component.html',
-  styleUrls: ['./cart-popup.component.scss'],
+  styleUrls: ['./cart-popup.component.css'],
   imports: [MatIconModule, CommonModule, AsyncPipe],
   standalone: true,
 })
