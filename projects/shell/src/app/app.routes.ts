@@ -25,6 +25,13 @@ export const routes: Routes = [
         (feature) => feature.orderFoodRoutes
       ),
   },
+  {
+    path: 'admin-panel',
+    loadComponent: () =>
+      loadRemoteModule('admin-panel', './Component').then(
+        (m) => m.AppComponent
+      ),
+  },
 
   { path: '**', redirectTo: 'home' },
 ];

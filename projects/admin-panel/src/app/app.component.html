@@ -1,0 +1,92 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">Admin Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-700">
+        Real-time Attendance
+      </h2>
+      <table class="w-full border border-gray-200 rounded-lg overflow-hidden">
+        <thead>
+          <tr class="bg-gray-100 text-gray-600 text-left">
+            <th class="p-3">Employee ID</th>
+            <th class="p-3">Name</th>
+            <th class="p-3">Present</th>
+            <th class="p-3">Time In</th>
+            <th class="p-3">Time Out</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let element of attendanceData" class="border-b">
+            <td class="p-3">{{ element.employeeId }}</td>
+            <td class="p-3">{{ element.name }}</td>
+            <td class="p-3">{{ element.present ? "Yes" : "No" }}</td>
+            <td class="p-3">{{ element.timeIn }}</td>
+            <td class="p-3">{{ element.timeOut }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-700">Payroll Data</h2>
+      <table class="w-full border border-gray-200 rounded-lg overflow-hidden">
+        <thead>
+          <tr class="bg-gray-100 text-gray-600 text-left">
+            <th class="p-3">Employee ID</th>
+            <th class="p-3">Name</th>
+            <th class="p-3">Salary</th>
+            <th class="p-3">Deductions</th>
+            <th class="p-3">Net Pay</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let element of payrollData" class="border-b">
+            <td class="p-3">{{ element.employeeId }}</td>
+            <td class="p-3">{{ element.name }}</td>
+            <td class="p-3">{{ element.salary }}</td>
+            <td class="p-3">{{ element.deductions }}</td>
+            <td class="p-3">{{ element.netPay }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 text-gray-800">User Time Log</h2>
+  <div class="bg-white p-6 rounded-lg shadow">
+    <div class="flex gap-4 mb-4">
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        (click)="punchIn()"
+      >
+        Punch In
+      </button>
+      <button
+        class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+        (click)="punchOut()"
+      >
+        Punch Out
+      </button>
+    </div>
+    <div *ngIf="userPunchIn.time" class="text-gray-700">
+      <p class="mt-4">
+        Punch In Time: <span class="font-semibold">{{ userPunchIn.time }}</span>
+      </p>
+      <p>
+        Geolocation:
+        <span class="font-semibold">{{ userPunchIn.geolocation }}</span>
+      </p>
+    </div>
+    <div *ngIf="userPunchOut.time" class="text-gray-700">
+      <p class="mt-4">
+        Punch Out Time:
+        <span class="font-semibold">{{ userPunchOut.time }}</span>
+      </p>
+      <p>
+        Geolocation:
+        <span class="font-semibold">{{ userPunchOut.geolocation }}</span>
+      </p>
+    </div>
+  </div>
+</div>
