@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatCardModule } from '@angular/material/card'; // Import MatCardModule
-import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { ReusableTableComponent } from './reusable-table/reusable-table.component';
 
 @Component({
   selector: 'app-admin-panel-root',
@@ -21,12 +21,30 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     CommonModule,
+    ReusableTableComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'admin-panel';
+  searchQuery: string = '';
+
+  attendanceColumns = [
+    { key: 'employeeId', label: 'Employee ID' },
+    { key: 'name', label: 'Name' },
+    { key: 'present', label: 'Present' },
+    { key: 'timeIn', label: 'Time In' },
+    { key: 'timeOut', label: 'Time Out' },
+  ];
+
+  payrollColumns = [
+    { key: 'employeeId', label: 'Employee ID' },
+    { key: 'name', label: 'Name' },
+    { key: 'salary', label: 'Salary' },
+    { key: 'deductions', label: 'Deductions' },
+    { key: 'netPay', label: 'Net Pay' },
+  ];
 
   attendanceData = [
     {
@@ -43,14 +61,6 @@ export class AppComponent {
       timeIn: '',
       timeOut: '',
     },
-  ];
-
-  displayedColumns: string[] = [
-    'employeeId',
-    'name',
-    'present',
-    'timeIn',
-    'timeOut',
   ];
 
   payrollData = [
@@ -70,13 +80,21 @@ export class AppComponent {
     },
   ];
 
-  payrollDisplayedColumns: string[] = [
-    'employeeId',
-    'name',
-    'salary',
-    'deductions',
-    'netPay',
-  ];
+  filteredAttendanceData() {
+    return this.attendanceData.filter((item) =>
+      Object.values(item).some((value) =>
+        String(value).toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+    );
+  }
+
+  filteredPayrollData() {
+    return this.payrollData.filter((item) =>
+      Object.values(item).some((value) =>
+        String(value).toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+    );
+  }
 
   userPunchIn: any = { time: '', geolocation: '' };
   userPunchOut: any = { time: '', geolocation: '' };
