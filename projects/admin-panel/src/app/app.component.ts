@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { LeaveDetailsComponent } from './leave-details/leave-details.component';
 import { AttendaceComponent } from './attendace/attendace.component';
+import { LeaveApplicationsComponent } from './leave-applications/leave-applications.component';
 
 @Component({
   selector: 'app-admin-panel-root',
@@ -12,6 +13,7 @@ import { AttendaceComponent } from './attendace/attendace.component';
     MatTabsModule,
     AttendaceComponent,
     LeaveDetailsComponent,
+    LeaveApplicationsComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
