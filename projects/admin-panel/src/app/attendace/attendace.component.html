@@ -1,0 +1,64 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">Admin Dashboard</h1>
+
+  <!-- Search Bar -->
+  <div class="mb-4">
+    <input
+      type="text"
+      class="w-full p-3 border rounded-lg"
+      placeholder="Search..."
+      [(ngModel)]="searchQuery"
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <app-admin-panel-reusable-table
+      title="Real-time Attendance"
+      [data]="filteredAttendanceData()"
+      [displayedColumns]="attendanceColumns"
+    ></app-admin-panel-reusable-table>
+
+    <app-admin-panel-reusable-table
+      title="Payroll Data"
+      [data]="filteredPayrollData()"
+      [displayedColumns]="payrollColumns"
+    ></app-admin-panel-reusable-table>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 text-gray-800">User Time Log</h2>
+  <div class="bg-white p-6 rounded-lg shadow">
+    <div class="flex gap-4 mb-4">
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        (click)="punchIn()"
+      >
+        Punch In
+      </button>
+      <button
+        class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+        (click)="punchOut()"
+      >
+        Punch Out
+      </button>
+    </div>
+    <div *ngIf="userPunchIn.time" class="text-gray-700">
+      <p class="mt-4">
+        Punch In Time: <span class="font-semibold">{{ userPunchIn.time }}</span>
+      </p>
+      <p>
+        Geolocation:
+        <span class="font-semibold">{{ userPunchIn.geolocation }}</span>
+      </p>
+    </div>
+    <div *ngIf="userPunchOut.time" class="text-gray-700">
+      <p class="mt-4">
+        Punch Out Time:
+        <span class="font-semibold">{{ userPunchOut.time }}</span>
+      </p>
+      <p>
+        Geolocation:
+        <span class="font-semibold">{{ userPunchOut.geolocation }}</span>
+      </p>
+    </div>
+  </div>
+</div>
