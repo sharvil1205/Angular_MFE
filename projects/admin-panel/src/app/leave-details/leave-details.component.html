@@ -1,12 +1,39 @@
-<div class="bg-white rounded-lg shadow p-6 mt-10">
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Leave Distribution</h2>
-  <div class="w-[300px] h-[300px]">
-    <canvas
-      baseChart
-      [data]="pieChartData"
-      [options]="pieChartOptions"
-      [type]="pieChartType"
-    >
-    </canvas>
+<div class="flex justify-around w-full mt-10">
+  <div class="bg-white rounded-lg shadow p-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+      Leave Distribution ({{ selectedMonth }})
+    </h2>
+
+    <div class="w-[300px] h-[300px] mx-auto">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [options]="pieChartOptions"
+        [type]="pieChartType"
+      ></canvas>
+    </div>
+
+    <div class="flex justify-center items-center mt-10">
+      <label for="monthSelect" class="font-medium mr-2">Select Month:</label>
+      <select
+        id="monthSelect"
+        class="border rounded p-2"
+        [(ngModel)]="selectedMonth"
+        (change)="updatePieChart()"
+      >
+        <option *ngFor="let month of months" [value]="month">
+          {{ month }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      Leave Trends Over Time
+    </h2>
+    <div class="w-[600px] h-[400px]">
+      <canvas baseChart [data]="lineChartData" [type]="lineChartType"></canvas>
+    </div>
   </div>
 </div>
