@@ -4,23 +4,24 @@
   <!-- Search Bar -->
   <div class="mb-4">
     <input
-      type="text"
-      class="w-full p-3 border rounded-lg"
-      placeholder="Search..."
+      matInput
       [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Search..."
+      class="w-full p-3 border rounded-lg"
     />
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <app-admin-panel-reusable-table
       title="Real-time Attendance"
-      [data]="filteredAttendanceData()"
+      [data]="filteredAttendance"
       [displayedColumns]="attendanceColumns"
     ></app-admin-panel-reusable-table>
 
     <app-admin-panel-reusable-table
       title="Payroll Data"
-      [data]="filteredPayrollData()"
+      [data]="filteredPayroll"
       [displayedColumns]="payrollColumns"
     ></app-admin-panel-reusable-table>
   </div>

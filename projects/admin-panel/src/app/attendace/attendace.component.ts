@@ -60,18 +60,37 @@ export class AttendaceComponent {
       netPay: 54000,
     },
   ];
-  searchQuery: string = '';
 
-  filteredAttendanceData() {
-    return this.attendanceData.filter((item) =>
+  searchQuery: string = '';
+  filteredAttendance: any[] = [];
+  filteredPayroll: any[] = [];
+
+  constructor() {
+    this.updateFilteredData();
+  }
+
+  ngOnInit() {
+    this.updateFilteredData();
+  }
+
+  onSearchChange() {
+    this.updateFilteredData();
+  }
+
+  updateFilteredData() {
+    if (!this.searchQuery) {
+      this.filteredAttendance = [...this.attendanceData];
+      this.filteredPayroll = [...this.payrollData];
+      return;
+    }
+
+    this.filteredAttendance = this.attendanceData.filter((item) =>
       Object.values(item).some((value) =>
         String(value).toLowerCase().includes(this.searchQuery.toLowerCase())
       )
     );
-  }
 
-  filteredPayrollData() {
-    return this.payrollData.filter((item) =>
+    this.filteredPayroll = this.payrollData.filter((item) =>
       Object.values(item).some((value) =>
         String(value).toLowerCase().includes(this.searchQuery.toLowerCase())
       )
