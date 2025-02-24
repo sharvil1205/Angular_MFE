@@ -1,0 +1,40 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Holiday Management</h1>
+
+    <div class="flex gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Month</mat-label>
+        <mat-select
+          [(ngModel)]="selectedMonth"
+          (selectionChange)="onMonthChange()"
+          class="w-48"
+        >
+          @for (month of months; track month.value) {
+          <mat-option [value]="month.value">{{ month.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>View Type</mat-label>
+        <mat-select [(ngModel)]="selectedView" class="w-48">
+          <mat-option value="table">Table View</mat-option>
+          <mat-option value="calendar">Calendar View</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  @if (selectedView === 'table') {
+  <app-admin-panel-reusable-table
+    [title]="'Holidays List'"
+    [data]="filteredHolidays"
+    [displayedColumns]="displayedColumns"
+  />
+  } @else {
+  <div class="bg-white rounded-lg shadow p-6">
+    <p class="text-gray-600">Calendar view coming soon...</p>
+  </div>
+  }
+</div>
